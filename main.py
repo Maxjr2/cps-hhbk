@@ -1,31 +1,63 @@
-"""Main application for temperature monitoring and control."""
-import sensor.ky001
-import actor.led
-import actor.ky006
+"""Main application for temperature monitoring and control.
+
+The public API is intentionally small: `get_sensor_state()` performs a
+single read and applies actor controls; it returns a small dict describing
+the observed state. Side effects (LED/buzzer) are performed but callers
+can examine the returned dict for programmatic checks.
+"""
+from __future__ import annotations
+
+from typing import Dict, Any
+import logging
+
+from sensor import ky001
+from actor import led as actor_led
+from actor import ky006 as actor_buzzer
 import config
 
-def get_sensor_state():
-    """Reads temperature and controls LED and buzzer based on thresholds."""
-    temperature, _ = sensor.ky001.read_temp()
+LOG = logging.getLogger(__name__)
 
-    # Control LED based on temperature ranges
-    if temperature < config.TEMP_WARM:
-        actor.led.set_led("green")
-    elif temperature < config.TEMP_HOT:
-        actor.led.set_led("yellow")
+
+def get_sensor_state() -> Dict[str, Any]:
+    """Read temperature and control LED + buzzer.
+
+    Returns a dict with keys: `temperature_c`, `temperature_f`, `led`,
+    `buzzer_on`.
+    """
+    temp_c, temp_f = ky001.read_temp()
+
+    # Decide LED color
+    if temp_c < config.TEMP_WARM:
+        color = "green"
+    elif temp_c < config.TEMP_HOT:
+        color = "yellow"
     else:
-        actor.led.set_led("red")
+        color = "red"
 
-    # Control buzzer for critical temperatures
-    if temperature >= config.TEMP_CRITICAL:
-        actor.ky006.buzz("start")
-    else:
-        actor.ky006.buzz("stop")
+    actor_led.set_led(color)
+
+    buzzer_on = temp_c >= config.TEMP_CRITICAL
+    actor_buzzer.buzz("start" if buzzer_on else "stop")
+
+    LOG.info("Sensor read: %.2f°C -> LED=%s buzzer=%s", temp_c, color, buzzer_on)
+
+    return {
+        "temperature_c": temp_c,
+        "temperature_f": temp_f,
+        "led": color,
+        "buzzer_on": buzzer_on,
+    }
 
 
+def run_selftests() -> None:
+    """Run selftests for actors and sensors.
 
-def run_selftests():
-    """Runs self-tests for all connected sensors and actors."""
-    actor.led.selftest()
-    actor.ky006.selftest()
-    sensor.ky001.selftest()
+    This is a convenience wrapper that calls the module-level `selftest()`
+    functions. Each selftest is expected to be side-effect limited and may
+    return a small value; here we only invoke them for their console
+    output.
+    """
+    actor_led.selftest()
+    actor_buzzer.selftest()
+    ky001.selftest()
+

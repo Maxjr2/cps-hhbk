@@ -1,59 +1,81 @@
-"""Actor module to control LEDs."""
+"""Actor module to control LEDs.
+
+This module exposes a small API for working with the three LEDs used by
+the project (`green`, `yellow`, `red`). On non-RPi systems a lightweight
+mock implementation prints state changes to stdout; on hardware the
+`gpiozero.LED` class is used.
+"""
+from __future__ import annotations
 
 from time import sleep
+import logging
+from typing import Dict, Optional
+
 import config
 
-# Try to import real hardware, fall back to mock for testing
+LOG = logging.getLogger(__name__)
+
+# Try to import real hardware, fall back to a local mock for portability
 try:
-    from gpiozero import LED
+    from gpiozero import LED  # type: ignore
 except (ImportError, RuntimeError):
-    # Mock LED class for testing on non-RPi systems
-    class LED:
-        def __init__(self, pin=None):
+    class LED:  # pragma: no cover - exercised by dev machines
+        def __init__(self, pin: int | None = None) -> None:
             self.pin = pin
             self.state = False
 
-        def on(self):
+        def on(self) -> None:
             self.state = True
-            print(f"[MOCK] LED on pin {self.pin}: ON")
+            LOG.info("[MOCK] LED on pin %s: ON", self.pin)
 
-        def off(self):
+        def off(self) -> None:
             self.state = False
-            print(f"[MOCK] LED on pin {self.pin}: OFF")
+            LOG.info("[MOCK] LED on pin %s: OFF", self.pin)
 
-# Initialize LED hardware
+
+# Initialize LED hardware objects
 green_led = LED(config.LED_GREEN_PIN)
 yellow_led = LED(config.LED_YELLOW_PIN)
 red_led = LED(config.LED_RED_PIN)
 
-# LED mapping for easier access
-LEDS = {
+LEDS: Dict[str, LED] = {
     "green": green_led,
     "yellow": yellow_led,
-    "red": red_led
+    "red": red_led,
 }
 
 
-def set_led(color):
-    """Sets the LED color by turning off all LEDs and activating the specified one.
+def set_led(color: Optional[str]) -> None:
+    """Activate the requested LED and turn off all others.
 
     Args:
-        color (str): LED color to activate ('green', 'yellow', or 'red')
+        color: One of 'green', 'yellow', 'red' or `None` to turn all off.
     """
-    # Turn off all LEDs
+    # Turn off all LEDs first
     for led in LEDS.values():
         led.off()
 
-    # Turn on requested LED if valid
-    if color in LEDS:
+    if color is None:
+        return
+
+    try:
         LEDS[color].on()
+    except KeyError as exc:
+        raise ValueError(f"Unknown LED color: {color}") from exc
 
 
-def selftest():
-    """Runs a self-test by cycling through all LED colors."""
+def selftest() -> dict:
+    """Cycle through LEDs and return a simple status dict.
+
+    The return value is JSON-serializable to integrate with the shared
+    selftest runner.
+    """
+    cycled = []
     for color in ["green", "yellow", "red"]:
         set_led(color)
-        sleep(1)
+        cycled.append(color)
+        sleep(0.3)
 
     # Turn off all LEDs after test
     set_led(None)
+    return {"cycled": cycled}
