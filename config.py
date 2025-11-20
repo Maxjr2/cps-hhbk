@@ -24,4 +24,3 @@ TEMP_COLD: Final[float] = 21.0
 TEMP_WARM: Final[float] = 26.0
 TEMP_HOT: Final[float] = 31.0
 TEMP_CRITICAL: Final[float] = 35.0
-

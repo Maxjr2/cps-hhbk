@@ -1,8 +1,8 @@
 """KY-006 Buzzer Actor Module.
 
 Provides a small `buzz()` API and a `buzzer` instance initialized from
-configuration. On non-RPi systems a mock implementation logs to the
-standard logging facility instead of printing to stdout.
+configuration. On non-RPi systems the centralized mocking infrastructure
+from `utils.mocking` is used instead of gpiozero.
 """
 from __future__ import annotations
 
@@ -11,25 +11,19 @@ import logging
 from typing import Literal
 
 import config
+from utils.mocking import MockPWMOutputDevice
 
 LOG = logging.getLogger(__name__)
 
-# Try to import real hardware, fall back to a local mock for portability
+# Try to import real hardware, fall back to centralized mock
+MOCK_MODE = False
 try:
     from gpiozero import PWMOutputDevice  # type: ignore
+    LOG.debug("Using gpiozero PWM hardware")
 except (ImportError, RuntimeError):
-    class PWMOutputDevice:  # pragma: no cover - used on dev machines
-        def __init__(self, pin: int, frequency: int = 500, initial_value: float = 0.0) -> None:
-            self.pin = pin
-            self.frequency = frequency
-            self.value = initial_value
-
-        def __setattr__(self, name: str, val):
-            object.__setattr__(self, name, val)
-            if name == "value" and val > 0:
-                LOG.info("[MOCK] Buzzer on pin %s: BUZZING at %sHz", self.pin, self.frequency)
-            elif name == "value" and val == 0:
-                LOG.info("[MOCK] Buzzer on pin %s: SILENT", self.pin)
+    PWMOutputDevice = MockPWMOutputDevice  # type: ignore
+    MOCK_MODE = True
+    LOG.info("GPIO hardware not available - using mock PWM device")
 
 
 # Initialize buzzer hardware with configured pin and frequency
@@ -51,18 +45,29 @@ def buzz(action: Action) -> None:
 
     Args:
         action: 'start' to activate buzzer, 'stop' to deactivate
+
+    Raises:
+        ValueError: If action is not 'start' or 'stop'
     """
     if action == "start":
         buzzer.value = BUZZER_DUTY_CYCLE
+        LOG.debug("Buzzer started")
     elif action == "stop":
         buzzer.value = 0
+        LOG.debug("Buzzer stopped")
     else:
+        LOG.error("Unknown buzzer action: %s", action)
         raise ValueError(f"Unknown action: {action}")
 
 
 def selftest() -> dict:
     """Runs a self-test by activating buzzer briefly and returning a status dict."""
-    buzz("start")
-    sleep(0.5)
-    buzz("stop")
-    return {"buzzed": True}
+    try:
+        buzz("start")
+        sleep(0.5)
+        buzz("stop")
+        LOG.info("Selftest passed: buzzer activated successfully")
+        return {"buzzed": True, "mode": "mock" if MOCK_MODE else "hardware"}
+    except Exception as e:
+        LOG.error("Selftest failed: %s", e)
+        raise

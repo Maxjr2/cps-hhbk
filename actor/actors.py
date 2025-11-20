@@ -13,7 +13,11 @@ from typing import Optional
 from utils.selftest import run_selftests
 
 
-def run_actor_selftests(directory: Optional[str] = None, pattern: str = "*.py", *, verbose: bool = False):
+def run_actor_selftests(
+        directory: Optional[str] = None,
+        pattern: str = "*.py",
+        *,
+        verbose: bool = False):
     base = Path(directory) if directory else Path(__file__).parent
     return run_selftests(str(base), pattern, verbose=verbose)
 
