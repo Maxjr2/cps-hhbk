@@ -8,7 +8,7 @@
         
         
         <link rel="shortcut icon" href="img/favicon.ico">
-        <title>My Docs</title>
+        <title>CPS HHBK Documentation</title>
         <link href="css/bootstrap.min.css" rel="stylesheet">
         <link href="css/font-awesome.min.css" rel="stylesheet">
         <link href="css/base.css" rel="stylesheet">
@@ -20,10 +20,57 @@
     <body class="homepage">
         <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
             <div class="container">
-                <a class="navbar-brand" href=".">My Docs</a>
+                <a class="navbar-brand" href=".">CPS HHBK Documentation</a>
+                <!-- Expander button -->
+                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
 
                 <!-- Expanded navigation -->
                 <div id="navbar-collapse" class="navbar-collapse collapse">
+                        <!-- Main navigation -->
+                        <ul class="nav navbar-nav">
+                            <li class="navitem active">
+                                <a href="." class="nav-link">Home</a>
+                            </li>
+                            <li class="navitem">
+                                <a href="getting-started/" class="nav-link">Getting Started</a>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Actuators <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="actuators/index.md" class="dropdown-item">Overview</a>
+</li>
+                                    
+<li>
+    <a href="actuators/actuator_a.md" class="dropdown-item">Actuator A</a>
+</li>
+                                    
+<li>
+    <a href="actuators/actuator_b.md" class="dropdown-item">Actuator B</a>
+</li>
+                                </ul>
+                            </li>
+                            <li class="dropdown">
+                                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Sensors <b class="caret"></b></a>
+                                <ul class="dropdown-menu">
+                                    
+<li>
+    <a href="sensors/index.md" class="dropdown-item">Overview</a>
+</li>
+                                    
+<li>
+    <a href="sensors/sensor_a.md" class="dropdown-item">Sensor A</a>
+</li>
+                                    
+<li>
+    <a href="sensors/sensor_b.md" class="dropdown-item">Sensor B</a>
+</li>
+                                </ul>
+                            </li>
+                        </ul>
 
                     <ul class="nav navbar-nav ml-auto">
                         <li class="nav-item">
@@ -31,6 +78,16 @@
                                 <i class="fa fa-search"></i> Search
                             </a>
                         </li>
+                            <li class="nav-item">
+                                <a rel="prev" class="nav-link disabled">
+                                    <i class="fa fa-arrow-left"></i> Previous
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a rel="next" href="getting-started/" class="nav-link">
+                                    Next <i class="fa fa-arrow-right"></i>
+                                </a>
+                            </li>
                     </ul>
                 </div>
             </div>
@@ -49,7 +106,7 @@
     <div id="toc-collapse" class="navbar-collapse collapse card bg-light">
         <ul class="nav flex-column">
             
-            <li class="nav-item" data-level="1"><a href="#main" class="nav-link">Main</a>
+            <li class="nav-item" data-level="1"><a href="#welcome-to-my-python-project" class="nav-link">Welcome to My Python Project</a>
               <ul class="nav flex-column">
               </ul>
             </li>
@@ -58,7 +115,14 @@
 </div></div>
                     <div class="col-md-9" role="main">
 
-<h1 id="main">Main</h1></div>
+<h1 id="welcome-to-my-python-project">Welcome to My Python Project</h1>
+<p>This documentation contains:</p>
+<ul>
+<li><strong>Getting Started</strong> instructions  </li>
+<li>A wiki for all <strong>Actuators</strong> modules  </li>
+<li>A wiki for all <strong>Sensors</strong> modules  </li>
+</ul>
+<p>Use the sidebar to navigate through the project documentation.</p></div>
             </div>
         </div>
 
@@ -141,5 +205,5 @@
 
 <!--
 MkDocs version : 1.5.3
-Build Date UTC : 2025-11-20 09:04:44.634225+00:00
+Build Date UTC : 2025-11-20 09:11:25.979026+00:00
 -->
