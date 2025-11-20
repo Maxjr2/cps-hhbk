@@ -1,11 +1,14 @@
+"""Utility to run self-tests for all sensor modules.
+
+This module dynamically imports all Python files in the sensors directory
+and executes their selftest() function if available.
+"""
 import traceback
 import uuid
 from pathlib import Path
 import json
 import importlib.util
 
-#TODO make this run on non rpi systems so the code can be tested more easily
-#TODO try to make sense of the st() (st() is not callable) error
 
 def run_selftests(directory: str = None, pattern: str = "*.py", *, verbose: bool = False):
     """
