@@ -6,6 +6,8 @@
 import glob
 import time
 
+#TODO make this more readable
+
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
@@ -29,3 +31,8 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         temp_f = temp_c * 9.0 / 5.0 + 32.0
         return temp_c, temp_f
+
+def selftest():
+    """Runs a self-test by reading and printing the temperature."""
+    temp_c, temp_f = read_temp()
+    print(f"Selftest: Temperature is {temp_c:.2f}°C / {temp_f:.2f}°F")
