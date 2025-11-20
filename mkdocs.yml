@@ -1,11 +1,85 @@
 site_name: CPS HHBK Documentation
+site_description: Temperature monitoring system using Raspberry Pi, sensors, and LEDs
+site_author: CPS HHBK Team
+repo_url: https://github.com/Maxjr2/cps-hhbk
+repo_name: Maxjr2/cps-hhbk
+
 theme:
   name: material
+  palette:
+    # Light mode
+    - scheme: default
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    # Dark mode
+    - scheme: slate
+      primary: indigo
+      accent: blue
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.instant
+    - navigation.tracking
+    - navigation.tabs
+    - navigation.sections
+    - navigation.expand
+    - navigation.top
+    - search.suggest
+    - search.highlight
+    - content.code.copy
+    - content.code.annotate
+  icon:
+    repo: fontawesome/brands/github
+
+markdown_extensions:
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - admonition
+  - pymdownx.details
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
+  - attr_list
+  - md_in_html
+  - tables
+  - footnotes
+  - pymdownx.tasklist:
+      custom_checkbox: true
+
+plugins:
+  - search
 
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Actors:
-      - LED: actors/led.md
+  - Architecture:
+      - How It Works: architecture/how-it-works.md
+      - System Design: architecture/system-design.md
+  - Hardware Setup:
+      - Overview: hardware/overview.md
+      - Wiring Guide: hardware/wiring.md
   - Sensors:
-      - KY001: sensors/sensor-KY001.md
+      - Overview: sensors/index.md
+      - KY-001 Temperature Sensor: sensors/sensor-KY001.md
+  - Actors:
+      - Overview: actors/index.md
+      - LED Controller: actors/led.md
+  - API Reference:
+      - Sensors API: api/sensors.md
+      - Actors API: api/actors.md
+  - Troubleshooting: troubleshooting.md
