@@ -9,8 +9,6 @@
       
       
       
-        <link rel="prev" href="../../getting-started/">
-      
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -18,7 +16,7 @@
     
     
       
-        <title>KY001 - CPS HHBK Documentation</title>
+        <title>KY-001 Temperature Sensor (DS18B20) - CPS HHBK Documentation</title>
       
     
     
@@ -63,7 +61,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#ky-001-temperatursensor-ds18b20" class="md-skip">
+        <a href="#ky-001-temperature-sensor-ds18b20" class="md-skip">
           Skip to content
         </a>
       
@@ -99,7 +97,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              KY001
+              KY-001 Temperature Sensor (DS18B20)
             
           </span>
         </div>
@@ -285,19 +283,17 @@
       
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_4" >
         
           <label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
             
@@ -310,7 +306,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Sensors
@@ -321,18 +317,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../sensor-KY001/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -341,7 +328,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -374,6 +360,77 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requirements" class="md-nav__link">
+    Requirements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#wiring" class="md-nav__link">
+    Wiring
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-brief" class="md-nav__link">
+    API (brief)
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#example" class="md-nav__link">
+    Example
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#integration-with-mainpy" class="md-nav__link">
+    Integration with main.py
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#common-issues-and-caveats" class="md-nav__link">
+    Common issues and caveats
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#suggested-module-improvements" class="md-nav__link">
+    Suggested module improvements
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#license" class="md-nav__link">
+    License
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -387,38 +444,33 @@
                   
 
 
-<h1 id="ky-001-temperatursensor-ds18b20">KY-001 Temperatursensor (DS18B20)</h1>
 <h1 id="ky-001-temperature-sensor-ds18b20">KY-001 Temperature Sensor (DS18B20)</h1>
 <h2 id="overview">Overview</h2>
-<h1 id="ky-001-temperature-sensor-ds18b20_1">KY-001 Temperature Sensor (DS18B20)</h1>
-<h2 id="overview_1">Overview</h2>
+<p>This page documents the <code>sensors/ky001.py</code> Python module which reads temperature data from a KY-001 (DS18B20) 1-Wire temperature sensor and explains how to integrate it into <code>main.py</code>.</p>
+<h2 id="requirements">Requirements</h2>
 <ul>
+<li>The Linux kernel must have the 1-Wire drivers loaded (for example <code>w1-gpio</code> and <code>w1-therm</code>).</li>
+<li>The sensor device is exposed under <code>/sys/bus/w1/devices/</code>. Devices typically appear in a directory starting with <code>28-</code>.</li>
 <li>The module reads the <code>w1_slave</code> file in the device folder. The process needs read permission for that file.</li>
 </ul>
 <h2 id="wiring">Wiring</h2>
 <ul>
-<li>Typical wiring for the KY-001 (DS18B20):<ul>
+<li>Typical wiring for the KY-001 (DS18B20):</li>
 <li>VCC -&gt; 3.3V</li>
 <li>GND -&gt; GND</li>
 <li>DATA -&gt; 1-Wire data line (use a ~4.7kΩ pull-up resistor to 3.3V if not provided on your board)</li>
 </ul>
-</li>
-</ul>
 <h2 id="api-brief">API (brief)</h2>
 <p>The module exposes two functions:</p>
 <ul>
+<li><code>read_temp_raw()</code> -&gt; list[str]</li>
 <li>
-<p><code>read_temp_raw()</code> -&gt; list[str]</p>
-<ul>
-<li>Reads the raw <code>w1_slave</code> file and returns its lines as a list of strings.</li>
-</ul>
+<p>Reads the raw <code>w1_slave</code> file and returns its lines as a list of strings.</p>
 </li>
 <li>
 <p><code>read_temp()</code> -&gt; (temp_c, temp_f) | None</p>
-<ul>
-<li>Calls <code>read_temp_raw()</code> until the first line ends with <code>YES</code>, then parses the <code>t=</code> value from the second line and returns a tuple <code>(temp_c, temp_f)</code> where <code>temp_c</code> is Celsius and <code>temp_f</code> is Fahrenheit. If a device is not present the module may raise an error at import time (see notes).</li>
-</ul>
 </li>
+<li>Calls <code>read_temp_raw()</code> until the first line ends with <code>YES</code>, then parses the <code>t=</code> value from the second line and returns a tuple <code>(temp_c, temp_f)</code> where <code>temp_c</code> is Celsius and <code>temp_f</code> is Fahrenheit. If a device is not present the module may raise an error at import time (see notes).</li>
 </ul>
 <h2 id="example">Example</h2>
 <p>Basic usage:</p>
@@ -426,10 +478,10 @@
 
 result = ky001.read_temp()
 if result is None:
-        print(&quot;Temperature could not be read&quot;)
+  print(&quot;Temperature could not be read&quot;)
 else:
-        temp_c, temp_f = result
-        print(f&quot;Temperature: {temp_c:.2f} °C / {temp_f:.2f} °F&quot;)
+  temp_c, temp_f = result
+  print(f&quot;Temperature: {temp_c:.2f} °C / {temp_f:.2f} °F&quot;)
 </code></pre>
 <h2 id="integration-with-mainpy">Integration with <code>main.py</code></h2>
 <p>The repository contains a <code>main.py</code> that imports <code>sensors.ky001</code> and calls <code>read_temp()</code> to decide LED colors. Important notes about integration:</p>
@@ -442,20 +494,20 @@ else:
 import actors.led
 
 def get_sensor_state():
-        result = ky001.read_temp()
-        if not result:
-                # handle missing sensor or read error
-                actors.led.set_led(&quot;yellow&quot;)
-                return
+  result = ky001.read_temp()
+  if not result:
+    # handle missing sensor or read error
+    actors.led.set_led(&quot;yellow&quot;)
+    return
 
-        temp_c, temp_f = result
-        # choose LED color based on Celsius
-        if temp_c &lt; 21:
-                actors.led.set_led(&quot;green&quot;)
-        elif temp_c &gt;= 31:
-                actors.led.set_led(&quot;red&quot;)
-        elif temp_c &gt;= 26:
-                actors.led.set_led(&quot;yellow&quot;)
+  temp_c, temp_f = result
+  # choose LED color based on Celsius
+  if temp_c &lt; 21:
+    actors.led.set_led(&quot;green&quot;)
+  elif temp_c &gt;= 31:
+    actors.led.set_led(&quot;red&quot;)
+  elif temp_c &gt;= 26:
+    actors.led.set_led(&quot;yellow&quot;)
 
 
 actors.led.selftest()
@@ -467,12 +519,10 @@ actors.led.selftest()
 </ul>
 <h2 id="common-issues-and-caveats">Common issues and caveats</h2>
 <ul>
-<li>
-<p>Import-time device lookup: the module currently resolves the device folder using <code>glob.glob(base_dir + '28*')[0]</code> at import time. If no 1-Wire device is present this will raise <code>IndexError</code> during import. Recommended alternatives:</p>
-<ul>
+<li>Import-time device lookup: the module currently resolves the device folder using <code>glob.glob(base_dir + '28*')[0]</code> at import time. If no 1-Wire device is present this will raise <code>IndexError</code> during import. Recommended alternatives:</li>
 <li>Move device discovery into a helper function that runs on first read.</li>
-<li>Wrap the initial device lookup in try/except and raise a clearer error.</li>
-</ul>
+<li>
+<p>Wrap the initial device lookup in try/except and raise a clearer error.</p>
 </li>
 <li>
 <p>Blocking reads: <code>read_temp()</code> polls the device file and sleeps (<code>time.sleep(0.2)</code>) until the data is marked valid. On missing or flaky hardware this can block the caller.</p>
