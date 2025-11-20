@@ -13,10 +13,10 @@
       
       
       
-        <link rel="prev" href="../">
+        <link rel="prev" href="../../getting-started/">
       
       
-        <link rel="next" href="../../actors/">
+        <link rel="next" href="../system-design/">
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>KY-001 Temperature Sensor - CPS HHBK Documentation</title>
+        <title>How It Works - CPS HHBK Documentation</title>
       
     
     
@@ -78,6 +78,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#how-it-works" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -108,7 +113,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              KY-001 Temperature Sensor
+              How It Works
             
           </span>
         </div>
@@ -246,11 +251,13 @@
         
   
   
+    
+  
   
     
     
-      <li class="md-tabs__item">
-        <a href="../../architecture/how-it-works/" class="md-tabs__link">
+      <li class="md-tabs__item md-tabs__item--active">
+        <a href="./" class="md-tabs__link">
           
   
   Architecture
@@ -282,13 +289,11 @@
         
   
   
-    
-  
   
     
     
-      <li class="md-tabs__item md-tabs__item--active">
-        <a href="../" class="md-tabs__link">
+      <li class="md-tabs__item">
+        <a href="../../sensors/" class="md-tabs__link">
           
   
   Sensors
@@ -439,19 +444,19 @@
       
   
   
+    
+  
   
     
     
     
-    <li class="md-nav__item md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
       
         
         
         
         
-          
-        
-        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_3" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_3" checked>
         
           <label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
             
@@ -464,7 +469,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="false">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_3_label" aria-expanded="true">
           <label class="md-nav__title" for="__nav_3">
             <span class="md-nav__icon md-icon"></span>
             Architecture
@@ -475,9 +480,29 @@
                 
   
   
+    
   
-    <li class="md-nav__item">
-      <a href="../../architecture/how-it-works/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    How It Works
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -486,6 +511,149 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#system-overview" class="md-nav__link">
+    System Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-flow" class="md-nav__link">
+    Operational Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-temperature-sensing" class="md-nav__link">
+    1. Temperature Sensing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-logic" class="md-nav__link">
+    2. Decision Logic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-led-actuation" class="md-nav__link">
+    3. LED Actuation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-loop" class="md-nav__link">
+    Control Loop
+  </a>
+  
+    <nav class="md-nav" aria-label="Control Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-implementation" class="md-nav__link">
+    Current Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-monitoring-recommended" class="md-nav__link">
+    Continuous Monitoring (Recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-states" class="md-nav__link">
+    System States
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    Error Handling
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sensor-errors" class="md-nav__link">
+    Sensor Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpio-errors" class="md-nav__link">
+    GPIO Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    Data Flow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-characteristics" class="md-nav__link">
+    Performance Characteristics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -497,7 +665,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../architecture/system-design/" class="md-nav__link">
+      <a href="../system-design/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -605,19 +773,19 @@
       
   
   
-    
-  
   
     
     
     
-    <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    <li class="md-nav__item md-nav__item--nested">
       
         
         
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_5" checked>
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
         
           <label class="md-nav__link" for="__nav_5" id="__nav_5_label" tabindex="0">
             
@@ -630,7 +798,7 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="true">
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
           <label class="md-nav__title" for="__nav_5">
             <span class="md-nav__icon md-icon"></span>
             Sensors
@@ -643,7 +811,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../" class="md-nav__link">
+      <a href="../../sensors/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -661,16 +829,9 @@
                 
   
   
-    
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../../sensors/sensor-KY001/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -679,7 +840,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -894,6 +1054,139 @@
   
   
   
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#system-overview" class="md-nav__link">
+    System Overview
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#operational-flow" class="md-nav__link">
+    Operational Flow
+  </a>
+  
+    <nav class="md-nav" aria-label="Operational Flow">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#1-temperature-sensing" class="md-nav__link">
+    1. Temperature Sensing
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#2-decision-logic" class="md-nav__link">
+    2. Decision Logic
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#3-led-actuation" class="md-nav__link">
+    3. LED Actuation
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#control-loop" class="md-nav__link">
+    Control Loop
+  </a>
+  
+    <nav class="md-nav" aria-label="Control Loop">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#current-implementation" class="md-nav__link">
+    Current Implementation
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#continuous-monitoring-recommended" class="md-nav__link">
+    Continuous Monitoring (Recommended)
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#system-states" class="md-nav__link">
+    System States
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#error-handling" class="md-nav__link">
+    Error Handling
+  </a>
+  
+    <nav class="md-nav" aria-label="Error Handling">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sensor-errors" class="md-nav__link">
+    Sensor Errors
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#gpio-errors" class="md-nav__link">
+    GPIO Errors
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#data-flow" class="md-nav__link">
+    Data Flow
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#performance-characteristics" class="md-nav__link">
+    Performance Characteristics
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#next-steps" class="md-nav__link">
+    Next Steps
+  </a>
+  
+</li>
+      
+    </ul>
   
 </nav>
                   </div>
@@ -911,9 +1204,199 @@
   
 
 
-  <h1>KY-001 Temperature Sensor</h1>
+<h1 id="how-it-works">How It Works</h1>
+<p>This page explains the operational flow and logic of the CPS HHBK temperature monitoring system.</p>
+<h2 id="system-overview">System Overview</h2>
+<p>The CPS HHBK system is a simple yet effective cyber-physical system that bridges the physical world (temperature) with digital control (LED indicators). It operates in a continuous sense-decide-act loop.</p>
+<pre class="mermaid"><code>graph LR
+    A[KY-001 Sensor] --&gt;|Temperature Data| B[Main Controller]
+    B --&gt;|Control Signal| C[LED Actors]
+    C --&gt;|Visual Feedback| D[User/Environment]
+    D -.-&gt;|Heat/Cool| A</code></pre>
+<h2 id="operational-flow">Operational Flow</h2>
+<h3 id="1-temperature-sensing">1. Temperature Sensing</h3>
+<p>The system continuously reads temperature from the KY-001 sensor via the 1-Wire protocol:</p>
+<pre class="mermaid"><code>sequenceDiagram
+    participant Main
+    participant KY001
+    participant Hardware
 
+    Main-&gt;&gt;KY001: read_temp()
+    KY001-&gt;&gt;Hardware: read_temp_raw()
+    Hardware--&gt;&gt;KY001: Raw data
+    KY001-&gt;&gt;KY001: Validate (check YES)
+    KY001-&gt;&gt;KY001: Parse temperature
+    KY001-&gt;&gt;KY001: Convert to °C and °F
+    KY001--&gt;&gt;Main: (temp_c, temp_f)</code></pre>
+<p><strong>Key Steps:</strong></p>
+<ol>
+<li><strong>Raw Data Read</strong>: Opens <code>/sys/bus/w1/devices/28-*/w1_slave</code> to read sensor data</li>
+<li><strong>Validation</strong>: Checks if the CRC is valid (line ends with "YES")</li>
+<li><strong>Retry Logic</strong>: If invalid, waits 200ms and retries</li>
+<li><strong>Temperature Extraction</strong>: Parses the temperature value (format: <code>t=23500</code> for 23.5°C)</li>
+<li><strong>Conversion</strong>: Calculates both Celsius and Fahrenheit values</li>
+</ol>
+<h3 id="2-decision-logic">2. Decision Logic</h3>
+<p>The main controller (<code>main.py</code>) implements a threshold-based decision algorithm:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-0-1"><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="k">def</span> <span class="nf">get_sensor_state</span><span class="p">():</span>
+</span><span id="__span-0-2"><a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a>    <span class="n">temperature</span> <span class="o">=</span> <span class="n">sensors</span><span class="o">.</span><span class="n">ky001</span><span class="o">.</span><span class="n">read_temp</span><span class="p">()</span>
+</span><span id="__span-0-3"><a id="__codelineno-0-3" name="__codelineno-0-3" href="#__codelineno-0-3"></a>    <span class="k">if</span> <span class="n">temperature</span> <span class="o">&lt;</span> <span class="mi">21</span><span class="p">:</span>
+</span><span id="__span-0-4"><a id="__codelineno-0-4" name="__codelineno-0-4" href="#__codelineno-0-4"></a>        <span class="n">actors</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">set_led</span><span class="p">(</span><span class="s2">&quot;green&quot;</span><span class="p">)</span>
+</span><span id="__span-0-5"><a id="__codelineno-0-5" name="__codelineno-0-5" href="#__codelineno-0-5"></a>    <span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;=</span> <span class="mi">26</span><span class="p">:</span>
+</span><span id="__span-0-6"><a id="__codelineno-0-6" name="__codelineno-0-6" href="#__codelineno-0-6"></a>        <span class="n">actors</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">set_led</span><span class="p">(</span><span class="s2">&quot;yellow&quot;</span><span class="p">)</span>
+</span><span id="__span-0-7"><a id="__codelineno-0-7" name="__codelineno-0-7" href="#__codelineno-0-7"></a>    <span class="k">elif</span> <span class="n">temperature</span> <span class="o">&gt;=</span> <span class="mi">31</span><span class="p">:</span>
+</span><span id="__span-0-8"><a id="__codelineno-0-8" name="__codelineno-0-8" href="#__codelineno-0-8"></a>        <span class="n">actors</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">set_led</span><span class="p">(</span><span class="s2">&quot;red&quot;</span><span class="p">)</span>
+</span></code></pre></div>
+<div class="admonition note">
+<p class="admonition-title">Temperature Thresholds</p>
+<p>The current implementation has three temperature zones:</p>
+<ul>
+<li><strong>Cool Zone</strong> (&lt; 21°C): Green LED</li>
+<li><strong>Warm Zone</strong> (21-25°C): Yellow LED</li>
+<li><strong>Hot Zone</strong> (≥ 26°C): Red LED</li>
+</ul>
+</div>
+<div class="admonition warning">
+<p class="admonition-title">Logic Issue</p>
+<p>There's a logical issue in the current implementation - the condition <code>elif temperature &gt;= 31</code> will never be reached because <code>elif temperature &gt;= 26</code> catches all values ≥ 26. This should be reviewed and fixed.</p>
+</div>
+<h3 id="3-led-actuation">3. LED Actuation</h3>
+<p>The LED controller manages GPIO pins to control LED states:</p>
+<pre class="mermaid"><code>graph TD
+    A[set_led called] --&gt; B[Turn off all LEDs]
+    B --&gt; C{Which color?}
+    C --&gt;|green| D[Turn on Green GPIO]
+    C --&gt;|yellow| E[Turn on Yellow GPIO]
+    C --&gt;|red| F[Turn on Red GPIO]
+    C --&gt;|None/other| G[All LEDs off]</code></pre>
+<p><strong>LED Control Process:</strong></p>
+<ol>
+<li><strong>Reset State</strong>: All LEDs are turned off first</li>
+<li><strong>Selective Activation</strong>: Only the target LED is turned on</li>
+<li><strong>GPIO Management</strong>: Uses <code>gpiozero.LED</code> for clean GPIO abstraction</li>
+</ol>
+<h2 id="control-loop">Control Loop</h2>
+<h3 id="current-implementation">Current Implementation</h3>
+<p>The current implementation executes a single temperature check followed by a self-test:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-1-1"><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="c1"># main.py</span>
+</span><span id="__span-1-2"><a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="n">actors</span><span class="o">.</span><span class="n">led</span><span class="o">.</span><span class="n">selftest</span><span class="p">()</span>  <span class="c1"># Runs once at startup</span>
+</span></code></pre></div>
+<h3 id="continuous-monitoring-recommended">Continuous Monitoring (Recommended)</h3>
+<p>For continuous monitoring, implement a control loop:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-2-1"><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="kn">import</span> <span class="nn">time</span>
+</span><span id="__span-2-2"><a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="kn">from</span> <span class="nn">main</span> <span class="kn">import</span> <span class="n">get_sensor_state</span>
+</span><span id="__span-2-3"><a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a>
+</span><span id="__span-2-4"><a id="__codelineno-2-4" name="__codelineno-2-4" href="#__codelineno-2-4"></a><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span><span id="__span-2-5"><a id="__codelineno-2-5" name="__codelineno-2-5" href="#__codelineno-2-5"></a>    <span class="n">get_sensor_state</span><span class="p">()</span>
+</span><span id="__span-2-6"><a id="__codelineno-2-6" name="__codelineno-2-6" href="#__codelineno-2-6"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">5</span><span class="p">)</span>  <span class="c1"># Check every 5 seconds</span>
+</span></code></pre></div>
+<pre class="mermaid"><code>graph TD
+    Start([Start]) --&gt; Init[Initialize Hardware]
+    Init --&gt; SelfTest[Run LED Self-Test]
+    SelfTest --&gt; Loop{Monitoring Loop}
+    Loop --&gt; ReadTemp[Read Temperature]
+    ReadTemp --&gt; Evaluate[Evaluate Threshold]
+    Evaluate --&gt; UpdateLED[Update LED State]
+    UpdateLED --&gt; Wait[Wait 5 seconds]
+    Wait --&gt; Loop</code></pre>
+<h2 id="system-states">System States</h2>
+<p>The system can be in one of the following states:</p>
+<table>
+<thead>
+<tr>
+<th>State</th>
+<th>Temperature</th>
+<th>LED Status</th>
+<th>GPIO State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Cool</td>
+<td>&lt; 21°C</td>
+<td>Green ON</td>
+<td>GPIO 17: HIGH</td>
+</tr>
+<tr>
+<td>Comfortable</td>
+<td>21-25°C</td>
+<td>Yellow ON</td>
+<td>GPIO 27: HIGH</td>
+</tr>
+<tr>
+<td>Warm</td>
+<td>≥ 26°C</td>
+<td>Red ON</td>
+<td>GPIO 22: HIGH</td>
+</tr>
+<tr>
+<td>Self-Test</td>
+<td>N/A</td>
+<td>Cycling</td>
+<td>Sequential activation</td>
+</tr>
+<tr>
+<td>Idle</td>
+<td>N/A</td>
+<td>All OFF</td>
+<td>All GPIOs: LOW</td>
+</tr>
+</tbody>
+</table>
+<h2 id="error-handling">Error Handling</h2>
+<h3 id="sensor-errors">Sensor Errors</h3>
+<p>The <code>read_temp()</code> function handles sensor errors through validation:</p>
+<div class="language-python highlight"><pre><span></span><code><span id="__span-3-1"><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="k">while</span> <span class="n">lines</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">strip</span><span class="p">()[</span><span class="o">-</span><span class="mi">3</span><span class="p">:]</span> <span class="o">!=</span> <span class="s1">&#39;YES&#39;</span><span class="p">:</span>
+</span><span id="__span-3-2"><a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a>    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mf">0.2</span><span class="p">)</span>
+</span><span id="__span-3-3"><a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a>    <span class="n">lines</span> <span class="o">=</span> <span class="n">read_temp_raw</span><span class="p">()</span>
+</span></code></pre></div>
+<p>If the CRC check fails, the system retries indefinitely until a valid reading is obtained.</p>
+<div class="admonition danger">
+<p class="admonition-title">Infinite Loop Risk</p>
+<p>If the sensor is disconnected or malfunctioning, this creates an infinite loop. Production code should implement a retry limit and error handling.</p>
+</div>
+<h3 id="gpio-errors">GPIO Errors</h3>
+<p>GPIO errors (e.g., pin already in use, permission denied) are not currently handled and will cause the program to crash.</p>
+<h2 id="data-flow">Data Flow</h2>
+<pre class="mermaid"><code>flowchart LR
+    subgraph Physical
+        Env[Environment]
+        Sensor[DS18B20 Sensor]
+        LEDs[RGB LEDs]
+    end
 
+    subgraph Software
+        KY001[ky001.py]
+        Main[main.py]
+        LED[led.py]
+    end
+
+    subgraph Hardware Interface
+        OneWire[1-Wire Bus]
+        GPIO[GPIO Pins]
+    end
+
+    Env --&gt;|Heat Transfer| Sensor
+    Sensor &lt;--&gt;|Digital Signal| OneWire
+    OneWire &lt;--&gt;|/sys/bus/w1| KY001
+    KY001 --&gt;|temp_c, temp_f| Main
+    Main --&gt;|Color Command| LED
+    LED &lt;--&gt;|gpiozero| GPIO
+    GPIO &lt;--&gt;|Electrical Signal| LEDs
+    LEDs --&gt;|Light| Env</code></pre>
+<h2 id="performance-characteristics">Performance Characteristics</h2>
+<ul>
+<li><strong>Sensor Update Rate</strong>: ~1-2 readings/second (limited by DS18B20 conversion time)</li>
+<li><strong>Response Time</strong>: &lt; 1 second from temperature change to LED update</li>
+<li><strong>Accuracy</strong>: ±0.5°C (DS18B20 specification)</li>
+<li><strong>Resolution</strong>: 0.001°C (software), 0.0625°C (hardware)</li>
+</ul>
+<h2 id="next-steps">Next Steps</h2>
+<ul>
+<li><strong><a href="../system-design/">System Design</a></strong> - Architectural patterns and design decisions</li>
+<li><strong><a href="../../api/sensors/">API Reference</a></strong> - Detailed API documentation</li>
+<li><strong><a href="../../hardware/overview/">Hardware Setup</a></strong> - Physical implementation details</li>
+</ul>
 
 
 
