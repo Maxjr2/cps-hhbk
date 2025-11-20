@@ -1,15 +1,11 @@
 site_name: CPS HHBK Documentation
 theme:
-  name: mkdocs
+  name: material
 
 nav:
   - Home: index.md
   - Getting Started: getting-started.md
-  - Actuators:
-      - Overview: actuators/index.md
-      - Actuator A: actuators/actuator_a.md
-      - Actuator B: actuators/actuator_b.md
+  - Actors:
+      - LED: actors/led.md
   - Sensors:
-      - Overview: sensors/index.md
-      - Sensor A: sensors/sensor_a.md
-      - Sensor B: sensors/sensor_b.md
+      - KY001: sensors/sensor-KY001.md
