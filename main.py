@@ -1,21 +1,26 @@
-"""...its the main file..."""
+"""Main application for temperature monitoring and control."""
 import sensor.ky001
 import actor.led
+import actor.ky006
+import config
 
-#TODO write some better code here /s
 def get_sensor_state():
-    """Reads temp and sets LED color acordingly. Activates buzzer if temp is too high."""
-    temperature = sensor.ky001.read_temp()
-    if temperature < 21:
+    """Reads temperature and controls LED and buzzer based on thresholds."""
+    temperature, _ = sensor.ky001.read_temp()
+
+    # Control LED based on temperature ranges
+    if temperature < config.TEMP_WARM:
         actor.led.set_led("green")
-    elif temperature >= 26:
+    elif temperature < config.TEMP_HOT:
         actor.led.set_led("yellow")
-    elif temperature >= 31:
+    else:
         actor.led.set_led("red")
-        if temperature >= 35:
-            actor.ky006.buzz("start")
-        elif temperature <= 34:
-            actor.ky006.buzz("stop")
+
+    # Control buzzer for critical temperatures
+    if temperature >= config.TEMP_CRITICAL:
+        actor.ky006.buzz("start")
+    else:
+        actor.ky006.buzz("stop")
 
 
 
