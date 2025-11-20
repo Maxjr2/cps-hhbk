@@ -62,6 +62,11 @@
     <label class="md-overlay" for="__drawer"></label>
     <div data-md-component="skip">
       
+        
+        <a href="#ky-001-temperatursensor-ds18b20" class="md-skip">
+          Skip to content
+        </a>
+      
     </div>
     <div data-md-component="announce">
       
@@ -324,6 +329,8 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
       <a href="./" class="md-nav__link md-nav__link--active">
         
@@ -364,6 +371,8 @@
   
   
   
+    
+  
   
 </nav>
                   </div>
@@ -378,9 +387,112 @@
                   
 
 
-  <h1>KY001</h1>
+<h1 id="ky-001-temperatursensor-ds18b20">KY-001 Temperatursensor (DS18B20)</h1>
+<h1 id="ky-001-temperature-sensor-ds18b20">KY-001 Temperature Sensor (DS18B20)</h1>
+<h2 id="overview">Overview</h2>
+<p>This page documents the <code>sensors/ky001.py</code> Python module which reads temperature data from a KY-001 (DS18B20) 1-Wire temperature sensor and explains how to integrate it into <code>main.py</code>.</p>
+<h2 id="requirements">Requirements</h2>
+<ul>
+<li>The Linux kernel must have the 1-Wire drivers loaded (for example <code>w1-gpio</code> and <code>w1-therm</code>).</li>
+<li>The sensor device is exposed under <code>/sys/bus/w1/devices/</code>. Devices typically appear in a directory starting with <code>28-</code>.</li>
+<li>The module reads the <code>w1_slave</code> file in the device folder. The process needs read permission for that file.</li>
+</ul>
+<h2 id="wiring">Wiring</h2>
+<ul>
+<li>Typical wiring for the KY-001 (DS18B20):<ul>
+<li>VCC -&gt; 3.3V</li>
+<li>GND -&gt; GND</li>
+<li>DATA -&gt; 1-Wire data line (use a ~4.7kΩ pull-up resistor to 3.3V if not provided on your board)</li>
+</ul>
+</li>
+</ul>
+<h2 id="api-brief">API (brief)</h2>
+<p>The module exposes two functions:</p>
+<ul>
+<li>
+<p><code>read_temp_raw()</code> -&gt; list[str]</p>
+<ul>
+<li>Reads the raw <code>w1_slave</code> file and returns its lines as a list of strings.</li>
+</ul>
+</li>
+<li>
+<p><code>read_temp()</code> -&gt; (temp_c, temp_f) | None</p>
+<ul>
+<li>Calls <code>read_temp_raw()</code> until the first line ends with <code>YES</code>, then parses the <code>t=</code> value from the second line and returns a tuple <code>(temp_c, temp_f)</code> where <code>temp_c</code> is Celsius and <code>temp_f</code> is Fahrenheit. If a device is not present the module may raise an error at import time (see notes).</li>
+</ul>
+</li>
+</ul>
+<h2 id="example">Example</h2>
+<p>Basic usage:</p>
+<pre><code class="language-python">from sensors import ky001
+
+result = ky001.read_temp()
+if result is None:
+        print(&quot;Temperature could not be read&quot;)
+else:
+        temp_c, temp_f = result
+        print(f&quot;Temperature: {temp_c:.2f} °C / {temp_f:.2f} °F&quot;)
+</code></pre>
+<h2 id="integration-with-mainpy">Integration with <code>main.py</code></h2>
+<p>The repository contains a <code>main.py</code> that imports <code>sensors.ky001</code> and calls <code>read_temp()</code> to decide LED colors. Important notes about integration:</p>
+<ul>
+<li>The current <code>sensors.ky001.read_temp()</code> returns a tuple <code>(temp_c, temp_f)</code>. <code>main.py</code> must unpack this tuple and use the Celsius value (or Fahrenheit, if desired) for numeric comparisons.</li>
+<li>The current <code>main.py</code> code calls <code>temperature = sensors.ky001.read_temp()</code> and then compares <code>temperature &lt; 21</code>. That will raise a TypeError because <code>temperature</code> is a tuple. To fix this, unpack the result and handle the None case.</li>
+</ul>
+<p>Recommended, safe pattern for <code>main.py</code>:</p>
+<pre><code class="language-python">from sensors import ky001
+import actors.led
+
+def get_sensor_state():
+        result = ky001.read_temp()
+        if not result:
+                # handle missing sensor or read error
+                actors.led.set_led(&quot;yellow&quot;)
+                return
+
+        temp_c, temp_f = result
+        # choose LED color based on Celsius
+        if temp_c &lt; 21:
+                actors.led.set_led(&quot;green&quot;)
+        elif temp_c &gt;= 31:
+                actors.led.set_led(&quot;red&quot;)
+        elif temp_c &gt;= 26:
+                actors.led.set_led(&quot;yellow&quot;)
 
 
+actors.led.selftest()
+</code></pre>
+<p>Notes on the logic above:</p>
+<ul>
+<li>Always check that <code>read_temp()</code> returned a value before unpacking. If <code>read_temp()</code> can block for a long time (waiting for raw data to report <code>YES</code>), consider calling it from a background thread or using a timeout mechanism.</li>
+<li>The order of range checks matters: check the highest threshold first or use an explicit range mapping.</li>
+</ul>
+<h2 id="common-issues-and-caveats">Common issues and caveats</h2>
+<ul>
+<li>
+<p>Import-time device lookup: the module currently resolves the device folder using <code>glob.glob(base_dir + '28*')[0]</code> at import time. If no 1-Wire device is present this will raise <code>IndexError</code> during import. Recommended alternatives:</p>
+<ul>
+<li>Move device discovery into a helper function that runs on first read.</li>
+<li>Wrap the initial device lookup in try/except and raise a clearer error.</li>
+</ul>
+</li>
+<li>
+<p>Blocking reads: <code>read_temp()</code> polls the device file and sleeps (<code>time.sleep(0.2)</code>) until the data is marked valid. On missing or flaky hardware this can block the caller.</p>
+</li>
+<li>
+<p>Permissions: ensure the process user has read access to <code>/sys/bus/w1/devices/.../w1_slave</code>.</p>
+</li>
+</ul>
+<h2 id="suggested-module-improvements">Suggested module improvements</h2>
+<ul>
+<li>Delay device-folder detection until the first reading.</li>
+<li>Return a richer result object or raise custom exceptions for error cases instead of returning <code>None</code>.</li>
+<li>Use <code>with open(...) as f:</code> when reading files to ensure proper resource handling.</li>
+</ul>
+<h2 id="license">License</h2>
+<p>The source file contains SPDX license tags indicating the MIT license (see the header in <code>sensors/ky001.py</code>).</p>
+<hr />
+<p>If you want, I can either update <code>main.py</code> to use <code>read_temp()</code> correctly, or change <code>sensors/ky001.py</code> to return a single Celsius float (or raise clearer exceptions). Which would you prefer me to do next?</p>
 
 
 
