@@ -1,7 +1,11 @@
+"""
+Dieses Programm wird für die Steuerung des Gesamten Systems genutzt.
+"""
+
+import time
 import ky001
 import ky006
 import led
-import time
 
 def get_state():
     if ky001.read_temp() <= 25.0:
@@ -14,7 +18,7 @@ def get_state():
         return "REDPLUS"
     else:
         return "BROKEN"
-    
+  
 def act_on_state(state):
     if state == "GREEN":
         ky006.buzz_off()

@@ -1,6 +1,10 @@
-from gpiozero import LED
-from time import sleep
+"""
+Heler zum Ansteuern der LEDs
+"""
 
+from gpiozero import LED
+
+# Die entsprechenden GPIO Pins werden hier gesetzt.
 red = LED(16)
 yellow = LED(20)
 green = LED(21)

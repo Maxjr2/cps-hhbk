@@ -1,6 +1,9 @@
-# SPDX-FileCopyrightText: 2019 Mikey Sklar for Adafruit Industries
-#
-# SPDX-License-Identifier: MIT
+"""
+Helper zum auslesen des KY-001 Temperatursensors
+Der Code wurde abgewandelt von: https://sensorkit.joy-it.net/de/sensors/ky-001
+SPDX-License-Identifier: MIT
+"""
+
 
 import glob
 import time
@@ -28,6 +31,7 @@ def read_temp():
         temp_c = float(temp_string) / 1000.0
         return temp_c
 
+#Wenn die Datei direkt ausgeführt wird, wird die Temperatur jede Sekunde ausgegeben.
 if __name__ == '__main__':
     while True:
         print("Temperature: {:.2f} C".format(read_temp()))
