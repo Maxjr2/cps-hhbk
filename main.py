@@ -17,7 +17,7 @@ def get_state():
     elif ky001.read_temp() >= 35.0:
         return "REDPLUS"
     else:
-        return "BROKEN"
+        return "ERROR"
   
 def act_on_state(state):
     if state == "GREEN":
