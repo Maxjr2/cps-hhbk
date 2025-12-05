@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cps-hhbk = "cps_hhbk.__main__:main"
+cps-hhbk = "cps-hhbk.main:main"
 
 
 [tool.setuptools]
@@ -33,5 +33,5 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 # adjust "where" if your code is not in the src/ layout
-where = ["src"]
+where = ["cps-hhbk"]
 exclude = ["tests*"]
