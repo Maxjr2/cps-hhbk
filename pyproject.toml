@@ -26,10 +26,5 @@ dependencies = [
 [project.scripts]
 cps-hhbk = "cps_hhbk.main:main"
 
-
-[tool.setuptools]
-# include package data files found under package directories
-include-package-data = true
-
 [tool.setuptools]
 packages = ["cps_hhbk"]
