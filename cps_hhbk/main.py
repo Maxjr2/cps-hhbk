@@ -3,9 +3,9 @@ Dieses Programm wird für die Steuerung des Gesamten Systems genutzt.
 """
 
 import time
-import ky001
-import ky006
-import led
+from . import ky001
+from . import ky006
+from . import led
 
 def get_state():
     if ky001.read_temp() <= 25.0:
