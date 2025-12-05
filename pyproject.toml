@@ -22,7 +22,7 @@ classifiers = [
 dependencies = [
     "gpiozero"
 ]
-]
+
 [project.scripts]
 cps-hhbk = "cps_hhbk.__main__:main"
 
