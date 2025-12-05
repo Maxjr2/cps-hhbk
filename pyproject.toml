@@ -31,7 +31,5 @@ cps-hhbk = "cps_hhbk.main:main"
 # include package data files found under package directories
 include-package-data = true
 
-[tool.setuptools.packages.find]
-# adjust "where" if your code is not in the src/ layout
-where = ["cps_hhbk"]
-exclude = ["tests*"]
+[tool.setuptools]
+packages = ["cps_hhbk"]
