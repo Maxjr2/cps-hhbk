@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "cps-hhbk"
-version = "0.0.3"
+version = "0.0.2"
 description = "Short description for the cps-hhbk project"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -24,7 +24,7 @@ dependencies = [
 ]
 
 [project.scripts]
-cps-hhbk = "cps-hhbk.main:main"
+cps-hhbk = "cps_hhbk.main:main"
 
 
 [tool.setuptools]
@@ -33,5 +33,5 @@ include-package-data = true
 
 [tool.setuptools.packages.find]
 # adjust "where" if your code is not in the src/ layout
-where = ["cps-hhbk"]
+where = ["cps_hhbk"]
 exclude = ["tests*"]
